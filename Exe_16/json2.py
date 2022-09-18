@@ -14,4 +14,9 @@ if len(url) < 1:
 html = urlopen(url, context=ctx).read()
 
 info = json.loads(html)
-print("Comments:", info['comments'])
+
+total = 0
+for item in info["comments"]:
+    number = int(item["count"])
+    total += number
+print("The sum is: " + str(total))
