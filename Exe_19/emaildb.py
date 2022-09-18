@@ -19,7 +19,7 @@ for line in fh:
         continue
     pieces = line.split()
     email = pieces[1]
-    email_split = email.split('@')
+    email_split = email.split("@")
     org = email_split[1]
     cur.execute("SELECT count FROM Counts WHERE org = ? ", (org,))
     row = cur.fetchone()
