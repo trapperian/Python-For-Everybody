@@ -1,6 +1,6 @@
+import json
 import urllib.request, urllib.parse, urllib.error
 from urllib.request import urlopen
-import xml.etree.ElementTree as ET
 import ssl
 
 # Ignore SSL certificate errors
@@ -10,12 +10,8 @@ ctx.verify_mode = ssl.CERT_NONE
 
 url = input("Enter - ")
 if len(url) < 1:
-    url = "http://py4e-data.dr-chuck.net/comments_42.xml"
+    url = "http://py4e-data.dr-chuck.net/comments_42.json"
 html = urlopen(url, context=ctx).read()
 
-tree = ET.fromstring(html)
-lst = tree.findall("comments/comment")
-total = 0
-for item in lst:
-    total += int(item.find("count").text)
-print("The total is: " + str(total))
+info = json.loads(html)
+print("Comments:", info['comments'])
